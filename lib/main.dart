@@ -1,3 +1,5 @@
+import 'package:custompaint/widgets/outlined_custom_button.dart';
+import 'package:custompaint/widgets/painters/painters.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -19,72 +21,21 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: const Text("Customs Painter"), centerTitle: true),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           spacing: 20,
           children: [
-            Text("Custom Paint", style: Theme.of(context).textTheme.headlineSmall),
-            Container(width: 230, height: 230, color: Colors.black12, child: CustomPaint(painter: RamdomPainter())),
-            Container(width: 230, height: 230, color: Colors.black12, child: CustomPaint(painter: CatPainter())),
+            OutlinedCustomButton(title: "Random Painter", childPainter: RandomPainter(), isFullScreen: false),
+            OutlinedCustomButton(title: "Michi Painter", childPainter: MichiPainter(), isFullScreen: false),
+            OutlinedCustomButton(title: "Basic Painter", childPainter: BasicPainter()),
+            OutlinedCustomButton(title: "Advanced 1", childPainter: Advanced1Painter()),
+            OutlinedCustomButton(title: "Advanced 2", childPainter: Advanced2Painter()),
+            OutlinedCustomButton(title: "Advanced 3", childPainter: Advanced3Painter()),
           ],
         ),
       ),
     );
   }
-}
-
-class RamdomPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint =
-        Paint()
-          ..color = Colors.black
-          ..strokeWidth = 5
-          ..style = PaintingStyle.stroke;
-
-    final path = Path();
-    path.lineTo(size.width * 0.5, 0);
-    path.lineTo(size.width * 0.5, size.height * 0.5);
-    path.lineTo(0, size.height * 0.5);
-    path.lineTo(0, size.height);
-    path.lineTo(size.width, size.height);
-    path.lineTo(size.width, size.height * 0.5);
-    path.lineTo(size.width * 0.5, size.height * 0.5);
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(RamdomPainter oldDelegate) => true;
-}
-
-class CatPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint =
-        Paint()
-          ..color = Colors.red
-          ..strokeWidth = 5
-          ..style = PaintingStyle.stroke;
-
-    final path = Path();
-
-    path.moveTo(size.width * 0.3333, 0);
-    path.lineTo(size.width * 0.3333, size.height);
-
-    path.moveTo(size.width * 0.6666, 0);
-    path.lineTo(size.width * 0.6666, size.height);
-
-    path.moveTo(0, size.height * 0.3333);
-    path.lineTo(size.width, size.height * 0.3333);
-
-    path.moveTo(0, size.height * 0.6666);
-    path.lineTo(size.width, size.height * 0.6666);
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(CatPainter oldDelegate) => true;
 }
